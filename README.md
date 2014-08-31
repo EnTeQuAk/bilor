@@ -34,7 +34,8 @@ Why Bilor when there is Sentry and Logstash?
 
 Bilor is very similar in many ways to Sentry and Raven when it comes to it's general idea but
 tries to experiment with totally different ways of storing the data and with that keeping
-it's core small, simple, extensible and reliable.
+it's core small, simple, extensible and reliable. Also, Bilor does not care about teams and groups and
+specific user permissions yet.
 
 Scaling ElasticSearch reliably is a known thing and there are many resources in that regard. Specifically
 in a virtualized environment such as Amazon AWS.
@@ -45,6 +46,10 @@ experiments. It'll pay out as a long-term-project eventually though and is alway
 Though Logstash makes more sense once you're trying to centralize logging for all applications e.g
 also nginx, PostgreSQL and other apps you're using to provide your service.
 
+Generally, if you have a huge infrastructure consider those alternatives:
+
+* Logstash, ElasticSearch, Kibana with message routing via RabbitMQ (Good tutorial: https://www.digitalocean.com/community/tutorials/how-to-use-logstash-and-kibana-to-centralize-and-visualize-logs-on-ubuntu-14-04)
+* Sentry and Raven. They are quite simple, they work and have good active development.
 
 Resources / Ideas
 =================
