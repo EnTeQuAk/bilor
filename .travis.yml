@@ -1,0 +1,19 @@
+language: python
+
+python: "3.4"
+
+services:
+  - elasticsearch
+
+env:
+  global:
+    - PIP_DOWNLOAD_CACHE=".pip_download_cache"
+
+script:
+  - make develop
+  - make test
+
+after_success:
+  - pip install "coveralls==0.4.1" coverage
+  - coverage report
+  - coveralls
