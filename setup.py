@@ -114,7 +114,6 @@ setup(
     extras_require={
         'docs': docs_requires,
         'tests': test_requires,
-        'dev': dev_requires,
     },
     zip_safe=False,
     license='BSD',

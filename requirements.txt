@@ -1,5 +1,5 @@
 # We depend on Django 1.7
--e git+https://github.com/django/django.git@stable/1.7.x#egg=django
+-e git+git@github.com:django/django.git@stable/1.7.x#egg=django
 
 # Django 1.7 fixes
--e git+https://github.com/EnTeQuAk/django-rest-framework-httpsignature#egg=django-rest-framework-httpsignature
+-e git+git@github.com:EnTeQuAk/django-rest-framework-httpsignature#egg=django-rest-framework-httpsignature
