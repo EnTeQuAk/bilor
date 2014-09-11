@@ -12,7 +12,6 @@ help:
 clean: clean-build clean-pyc
 
 deps:
-	pip install --upgrade -r requirements.txt
 	pip install -e .
 	pip install "file://`pwd`#egg=bilor[tox]"
 	pip install "file://`pwd`#egg=bilor[docs]"
