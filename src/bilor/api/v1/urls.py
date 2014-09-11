@@ -1,5 +1,3 @@
-from django.conf.urls import url, patterns
+from django.conf.urls import patterns
 
-urlpatterns = patterns('',
-    # Hookup our REST Api
-)
+urlpatterns = patterns('')
