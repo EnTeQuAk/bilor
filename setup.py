@@ -49,7 +49,13 @@ install_requires = [
 
     # Our data storage backend
     'elasticsearch',
-    'elasticsearch-dsl'
+    'elasticsearch-dsl',
+
+    # Traceback extraction tools.
+    'werkzeug',
+
+    # For the example client.
+    'requests',
 ]
 
 
