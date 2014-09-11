@@ -14,7 +14,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
     # Django apps
-    'django.contrib.contenttypes',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
