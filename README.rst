@@ -54,8 +54,56 @@ Generally, if you have a huge infrastructure consider those alternatives:
 * Logstash, ElasticSearch, Kibana with message routing via RabbitMQ (Good tutorial: https://www.digitalocean.com/community/tutorials/how-to-use-logstash-and-kibana-to-centralize-and-visualize-logs-on-ubuntu-14-04)
 * Sentry and Raven. They are quite simple, they work and have good active development.
 
+
+Installation
+============
+
+.. code-block:: bash
+
+    $ Create your virtualenv (recommended, use virtualenvwrapper)
+    $ mkvirtualenv bilor
+
+    $ # Clone repository
+    $ git clone git@github.com:EnTeQuAk/bilor.git
+
+    $ # Activate Environment and install
+    $ workon bilor
+    $ make develop
+
+    $ # run tests
+    $ make test
+
+
+Edit settings
+-------------
+
+Create a new file ``bilor/settings.py`` with the following content:
+
+.. code-block:: python
+
+    from bilor.conf.development import *
+
+Edit and adapt this file to your specific environment.
+
+
+Setup the database
+------------------
+
+You only need to install and start ElasticSearch.
+
+.. code-block:: bash
+
+   $ python manage.py runserver
+
+This starts a local webserver on `localhost:8000 <http://localhost:8000/>`_. To view the administration
+interface visit `/admin/ <http://localhost:8000/admin/>`_
+
+
 Resources / Ideas
 =================
 
 * http://www.elasticsearch.org/blog/curator-tending-your-time-series-indices/
 * http://www.elasticsearch.org/guide/en/elasticsearch/guide/current/retiring-data.html
+* `Documentation <http://mailme.readthedocs.org>`_
+* `Bug Tracker <https://github.com/mailme/mailme.io>`_
+* `Code <https://github.com/mailme/mailme.io>`_
