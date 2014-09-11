@@ -104,6 +104,6 @@ Resources / Ideas
 
 * http://www.elasticsearch.org/blog/curator-tending-your-time-series-indices/
 * http://www.elasticsearch.org/guide/en/elasticsearch/guide/current/retiring-data.html
-* `Documentation <http://mailme.readthedocs.org>`_
-* `Bug Tracker <https://github.com/mailme/mailme.io>`_
-* `Code <https://github.com/mailme/mailme.io>`_
+* `Documentation <http://bilor.readthedocs.org>`_
+* `Bug Tracker <https://github.com/EnTeQuAk/bilor>`_
+* `Code <https://github.com/EnTeQuAk/bilor>`_
