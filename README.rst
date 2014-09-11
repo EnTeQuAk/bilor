@@ -75,7 +75,7 @@ Installation
 
 
 Edit settings
--------------
+=============
 
 Create a new file ``bilor/settings.py`` with the following content:
 
@@ -87,7 +87,7 @@ Edit and adapt this file to your specific environment.
 
 
 Setup the database
-------------------
+==================
 
 You only need to install and start ElasticSearch.
 
@@ -99,11 +99,16 @@ This starts a local webserver on `localhost:8000 <http://localhost:8000/>`_. To 
 interface visit `/admin/ <http://localhost:8000/admin/>`_
 
 
-Resources / Ideas
-=================
+Ideas
+=====
 
 * http://www.elasticsearch.org/blog/curator-tending-your-time-series-indices/
 * http://www.elasticsearch.org/guide/en/elasticsearch/guide/current/retiring-data.html
+
+
+Resources
+=========
+
 * `Documentation <http://bilor.readthedocs.org>`_
 * `Bug Tracker <https://github.com/EnTeQuAk/bilor>`_
 * `Code <https://github.com/EnTeQuAk/bilor>`_
