@@ -46,6 +46,10 @@ install_requires = [
 
     # For our REST Api
     'djangorestframework>=2.3.14,<2.4',
+
+    # Our data storage backend
+    'elasticsearch',
+    'elasticsearch-dsl'
 ]
 
 
