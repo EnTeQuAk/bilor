@@ -48,6 +48,11 @@ DATABASES = {
     }
 }
 
+ELASTICSEARCH_CONFIG = {
+    'hosts': ['localhost'],
+    'index_name': 'bilor'
+}
+
 TEMPLATE_CONTEXT_PROCESSORS = TEMPLATE_CONTEXT_PROCESSORS + (
     'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
