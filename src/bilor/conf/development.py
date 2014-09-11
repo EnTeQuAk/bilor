@@ -5,10 +5,12 @@ TEMPLATE_DEBUG = True
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'bilor_dev',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': ':memory:'
     }
 }
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 
 LOGGING['loggers']['root']['level'] = 'DEBUG'
 LOGGING['loggers']['celery']['level'] = 'DEBUG'

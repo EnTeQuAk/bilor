@@ -14,10 +14,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
     # Django apps
-    'django.contrib.admin',
-    'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
@@ -27,7 +24,6 @@ INSTALLED_APPS = (
 
     # For our REST Api
     'rest_framework',
-    'rest_framework_httpsignature',
 
     # Application
     'bilor',
@@ -38,7 +34,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
