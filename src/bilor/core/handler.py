@@ -11,12 +11,12 @@ from django.utils.encoding import force_text
 class BilorHandler(logging.Handler):
     """Logging handler for bilor.
 
-    Based on raven.
+    Based on the raven logging handler.
     """
 
-    def __init__(self, host, *args, **kwargs):
+    def __init__(self, endpoint, *args, **kwargs):
         super(BilorHandler, self).__init__(level=kwargs.get('level', logging.NOTSET))
-        self.host = host
+        self.endpoint = endpoint
 
     def can_record(self, record):
         return not (
@@ -68,7 +68,6 @@ class BilorHandler(logging.Handler):
         # If there's no exception being processed, exc_info may be a 3-tuple of None
         # http://docs.python.org/library/sys.html#sys.exc_info
         if record.exc_info and all(record.exc_info):
-            data = {'exc_info': record.exc_info}
             data['traceback'] = get_current_traceback(skip=1)
 
 
