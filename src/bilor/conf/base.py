@@ -48,7 +48,7 @@ DATABASES = {
     }
 }
 
-ELASTICSEARCH_CONFIG = {
+ELASTICSEARCH_CONNECTION = {
     'hosts': ['localhost'],
     'index_name': 'bilor'
 }

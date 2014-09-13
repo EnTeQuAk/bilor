@@ -10,7 +10,7 @@ DATABASES = {
     }
 }
 
-ELASTICSEARCH_CONFIG = {
+ELASTICSEARCH_CONNECTION = {
     'hosts': ['localhost'],
     'index_name': 'bilor_dev',
     'sniff_on_start': True,

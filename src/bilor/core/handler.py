@@ -1,5 +1,3 @@
-import datetime
-import json
 import logging
 import sys
 import traceback
@@ -37,7 +35,9 @@ class BilorHandler(logging.Handler):
 
             return self._emit(record)
         except Exception:
-            print("Top level Bilor exception caught - failed creating log record", file=sys.stderr)
+            print(
+                'Top level Bilor exception caught - failed creating log record',
+                file=sys.stderr)
             print(force_text(record.msg), file=sys.stderr)
             print(force_text(traceback.format_exc()), file=sys.stderr)
 
@@ -109,5 +109,4 @@ class BilorHandler(logging.Handler):
             data['tags'] = record.tags
 
         endpoint = '{host}/api/v1/message/'.format(host=self.host)
-        headers = {'content-type': 'application/json'}
-        requests.post(endpoint, data=json.dumps(data), headers=headers)
+        requests.post(endpoint, data=data, format='json')

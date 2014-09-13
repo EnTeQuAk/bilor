@@ -1,8 +1,7 @@
-import pprint
-
 from django.http import HttpResponse
 from django.conf import settings
 from rest_framework.views import APIView
+from rest_framework import status
 
 from bilor.core.db import connect_elasticsearch
 from bilor.api.v1.throttling import MessageRateThrottle
@@ -18,12 +17,14 @@ class MessageView(APIView):
         es = connect_elasticsearch()
 
         response = es.index(
-            index=settings.ELASTICSEARCH_CONFIG['index_name'],
+            index=settings.ELASTICSEARCH_CONNECTION['index_name'],
             doc_type='message',
             body=request.DATA)
 
         if response['created']:
-            return HttpResponse('success')
+            return HttpResponse('success', status=status.HTTP_201_CREATED)
         else:
-            # TODO: Add proper erro handling
-            return HttpResponse('message was not saved', code=400)
+            # TODO: Add proper error handling
+            return HttpResponse(
+                'message was not saved',
+                status=status.HTTP_400_BAD_REQUEST)

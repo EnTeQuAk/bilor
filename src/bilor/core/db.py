@@ -5,7 +5,7 @@ from django.conf import settings
 
 def connect_elasticsearch():
     """Connect to ElasticSearch and ensure our base index exists."""
-    config = settings.ELASTICSEARCH_CONFIG.copy()
+    config = settings.ELASTICSEARCH_CONNECTION.copy()
 
     # TODO: Add support for multiple indices.
 
