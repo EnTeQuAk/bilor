@@ -39,7 +39,6 @@ class BilorHandler(logging.Handler):
             print(force_text(traceback.format_exc()), file=sys.stderr)
 
     def _emit(self, record, **kwargs):
-        # TODO: Clean this method up, it's logging stuff multiple times
         data = {}
 
         extra = getattr(record, 'data', None)
