@@ -1,12 +1,13 @@
+import json
 import logging
 import sys
 import traceback
 
 import requests
+from django.core.urlresolvers import reverse
+from django.utils.encoding import force_text
 from werkzeug.debug.tbtools import get_current_traceback
 from werkzeug.utils import escape
-
-from django.utils.encoding import force_text
 
 
 class BilorHandler(logging.Handler):
@@ -19,20 +20,9 @@ class BilorHandler(logging.Handler):
         super(BilorHandler, self).__init__(level=kwargs.get('level', logging.NOTSET))
         self.host = host.rstrip('/')
 
-    def can_record(self, record):
-        return not (
-            record.name == 'bilor' or
-            record.name.startswith('bilor.')
-        )
-
     def emit(self, record):
         try:
             self.format(record)
-
-            if not self.can_record(record):
-                print(force_text(record.message), file=sys.stderr)
-                return
-
             return self._emit(record)
         except Exception:
             print(
@@ -108,5 +98,6 @@ class BilorHandler(logging.Handler):
         if hasattr(record, 'tags'):
             data['tags'] = record.tags
 
-        endpoint = '{host}/api/v1/message/'.format(host=self.host)
-        requests.post(endpoint, data=data, format='json')
+        endpoint = self.host + reverse('api-v1:message')
+        headers = {'content-type': 'application/json'}
+        requests.post(endpoint, data=json.dumps(data), headers=headers)
