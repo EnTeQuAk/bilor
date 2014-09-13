@@ -12,6 +12,27 @@ Summary
 The idea behind Bilor is using the full power of ElasticSearch to make logging
 more accessible and searchable.
 
+
+Canveats / Future Improvements
+==============================
+
+ * The client is currently only a `logging` handler and resides in `bilor.core.handler`.
+   This can be easily splitted out into a separate library later.
+ * No specific error handling on the client yet. It's fault-tolerant and simply
+   ignores failures currently.
+ * Server-side grouping: ElasticSearch supports ``upsert`` on ``update`` statements. Should be the way to go.
+
+Things that are also missing currently:
+
+ * Authentication / proper ACL rules. It's all anonymous for now.
+
+Ideas for the client:
+
+ * Search (that's where ElasticSearch rocks!)
+ * Grouping (Got recently released in 1.3.0, see release notes for details)
+ * Expire old documents. ElasticSearch supports document ttls, very simple to implement.
+
+
 Features
 ========
 
@@ -104,14 +125,6 @@ Ideas
 
 * http://www.elasticsearch.org/blog/curator-tending-your-time-series-indices/
 * http://www.elasticsearch.org/guide/en/elasticsearch/guide/current/retiring-data.html
-
-Improvements
-============
-
-Things that are missing currently:
-
- * Authentication / proper ACL rules. It's all anonymous for now.
-
 
 Resources
 =========
