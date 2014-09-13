@@ -9,10 +9,10 @@ from bilor.core.db import connect_elasticsearch
 
 class TestMessageApi(APITestCase):
 
-    def setup(self):
+    def setUp(self):
         clear_elasticsearch_index()
 
-    def teardown(self):
+    def tearDown(self):
         clear_elasticsearch_index()
 
     def test_create_new_message(self):
