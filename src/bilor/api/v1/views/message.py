@@ -8,6 +8,14 @@ from bilor.api.v1.throttling import MessageRateThrottle
 
 
 class MessageView(APIView):
+    """Simple api view that stores messages.
+
+    Messages technically can contain any possible
+    json-serializable data.
+
+    For now there is no verification, yet this would
+    be a great idea to not allow spam to come forword.
+    """
     throttle_classes = (MessageRateThrottle,)
 
     def get(self, request, format=None):

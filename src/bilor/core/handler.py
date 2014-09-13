@@ -13,7 +13,8 @@ from werkzeug.utils import escape
 class BilorHandler(logging.Handler):
     """Logging handler for bilor.
 
-    Based on the raven logging handler.
+    Based on the raven logging handler, with more versatile
+    exception catching.
     """
     def __init__(self, host, *args, **kwargs):
         assert host.startswith('http')
@@ -48,9 +49,8 @@ class BilorHandler(logging.Handler):
             # Handle binary strings where it should be unicode...
             data['formatted'] = repr(record.message)[1:-1]
 
-        # If there's no exception being processed, exc_info may be a 3-tuple of None
-        # http://docs.python.org/library/sys.html#sys.exc_info
         if record.exc_info and all(record.exc_info):
+            # Record all details we can find from the current exception.
             tb = get_current_traceback(skip=1)
             exc = escape(tb.exception)
             serialized_frames = []
@@ -94,4 +94,6 @@ class BilorHandler(logging.Handler):
 
         endpoint = self.host + reverse('api-v1:message')
         headers = {'content-type': 'application/json'}
+
+        # TODO: error handling.
         requests.post(endpoint, data=json.dumps(data), headers=headers)
