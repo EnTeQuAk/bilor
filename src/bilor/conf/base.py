@@ -188,9 +188,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 REST_FRAMEWORK = {
     'DEFAULT_THROTTLE_CLASSES': (
-        'rest_framework.throttling.AnonRateThrottle',
+        'bilor.api.v1.throttling.MessageRateThrottle',
     ),
     'DEFAULT_THROTTLE_RATES': {
-        'anon': '10000/day',
+        'message': '60/min',
     }
 }
