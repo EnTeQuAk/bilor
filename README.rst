@@ -105,6 +105,13 @@ Ideas
 * http://www.elasticsearch.org/blog/curator-tending-your-time-series-indices/
 * http://www.elasticsearch.org/guide/en/elasticsearch/guide/current/retiring-data.html
 
+Improvements
+============
+
+Things that are missing currently:
+
+ * Authentication / proper ACL rules. It's all anonymous for now.
+
 
 Resources
 =========
