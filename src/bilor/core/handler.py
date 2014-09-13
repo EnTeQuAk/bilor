@@ -1,10 +1,13 @@
 import datetime
+import json
 import logging
 import sys
 import traceback
 
 import requests
 from werkzeug.debug.tbtools import get_current_traceback
+from werkzeug.utils import escape
+
 from django.utils.encoding import force_text
 
 
@@ -13,10 +16,10 @@ class BilorHandler(logging.Handler):
 
     Based on the raven logging handler.
     """
-
-    def __init__(self, endpoint, *args, **kwargs):
+    def __init__(self, host, *args, **kwargs):
+        assert host.startswith('http')
         super(BilorHandler, self).__init__(level=kwargs.get('level', logging.NOTSET))
-        self.endpoint = endpoint
+        self.host = host.rstrip('/')
 
     def can_record(self, record):
         return not (
@@ -48,9 +51,9 @@ class BilorHandler(logging.Handler):
             else:
                 extra = {}
 
-        date = datetime.datetime.utcfromtimestamp(record.created)
         data = {
             'params': record.args,
+            'created': record.created
         }
         try:
             data['message'] = force_text(record.msg)
@@ -67,11 +70,44 @@ class BilorHandler(logging.Handler):
         # If there's no exception being processed, exc_info may be a 3-tuple of None
         # http://docs.python.org/library/sys.html#sys.exc_info
         if record.exc_info and all(record.exc_info):
-            data['traceback'] = get_current_traceback(skip=1)
+            tb = get_current_traceback(skip=1)
+            exc = escape(tb.exception)
+            serialized_frames = []
+            for frame in tb.frames:
+                serialized_frame = {
+                    'id': frame.id,
+                    'filename': escape(frame.filename),
+                    'lineno': frame.lineno,
+                    'function_name': escape(frame.function_name),
+                    'current_line': escape(frame.current_line.strip()),
+                    'sourcelines': frame.sourcelines,
+                    'lines': []
+                }
 
+                for line in frame.get_annotated_lines():
+                    serialized_frame['lines'].append({
+                        'classes': line.classes,
+                        'lineno': line.lineno,
+                        'code': escape(line.code)
+                    })
+
+                serialized_frames.append(serialized_frame)
+
+            data['traceback'] = {
+                'title': exc,
+                'exception': exc,
+                'exception_type': escape(tb.exception_type),
+                'frames': serialized_frames,
+                'plaintext': tb.plaintext,
+                'traceback_id': tb.id,
+            }
 
         data['level'] = record.levelno
         data['logger'] = record.name
 
         if hasattr(record, 'tags'):
             data['tags'] = record.tags
+
+        endpoint = '{host}/api/v1/message/'.format(host=self.host)
+        headers = {'content-type': 'application/json'}
+        requests.post(endpoint, data=json.dumps(data), headers=headers)

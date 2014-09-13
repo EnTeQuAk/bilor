@@ -2,7 +2,7 @@ import logging
 from bilor.core.handler import BilorHandler
 
 logger = logging.getLogger('other.example')
-logger.addHandler(BilorHandler('localhost'))
+logger.addHandler(BilorHandler('http://localhost:8000/'))
 
 logger.debug('This is debug')
 logger.warning('This is warning')
