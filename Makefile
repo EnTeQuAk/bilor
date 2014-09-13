@@ -18,6 +18,10 @@ deps:
 	pip install "file://`pwd`#egg=bilor[tests]"
 
 develop: deps
+	# Install nodejs into this virtualenv.
+	pip install nodeenv
+	nodeenv -p
+
 	npm install
 	bower update
 	gem install foreman compass
