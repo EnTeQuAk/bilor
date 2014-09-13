@@ -49,6 +49,23 @@ class TestMessageApi(LiveServerTestCase):
             'params': []
         })
 
+    def test_handler_supports_extra_data(self):
+        logger = logging.getLogger('_bilor_testing')
+        handler = BilorHandler(self.live_server_url)
+        logger.addHandler(handler)
+        logger.setLevel(logging.DEBUG)
+
+        logger.debug('this is a debug message', extra={'extra': ['foo', 'bar']})
+        self._check({
+            'created': mock.ANY,
+            'formatted': 'this is a debug message',
+            'level': logging.DEBUG,
+            'logger': '_bilor_testing',
+            'message': 'this is a debug message',
+            'params': [],
+            'extra': ['foo', 'bar']
+        })
+
     def test_handler_warning(self):
         logger = logging.getLogger('_bilor_testing')
         handler = BilorHandler(self.live_server_url)
@@ -62,7 +79,7 @@ class TestMessageApi(LiveServerTestCase):
             'level': logging.WARNING,
             'logger': '_bilor_testing',
             'message': 'this is a warning message',
-            'params': []
+            'params': [],
         })
 
     def test_handler_info(self):
@@ -78,7 +95,7 @@ class TestMessageApi(LiveServerTestCase):
             'level': logging.INFO,
             'logger': '_bilor_testing',
             'message': 'this is an info message',
-            'params': []
+            'params': [],
         })
 
     def test_handler_error(self):
@@ -94,7 +111,7 @@ class TestMessageApi(LiveServerTestCase):
             'level': logging.ERROR,
             'logger': '_bilor_testing',
             'message': 'this is an error message',
-            'params': []
+            'params': [],
         })
 
     def test_handler_exception(self):

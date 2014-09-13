@@ -32,18 +32,9 @@ class BilorHandler(logging.Handler):
             print(force_text(traceback.format_exc()), file=sys.stderr)
 
     def _emit(self, record, **kwargs):
-        data = {}
-
-        extra = getattr(record, 'data', None)
-        if not isinstance(extra, dict):
-            if extra:
-                extra = {'data': extra}
-            else:
-                extra = {}
-
         data = {
             'params': record.args,
-            'created': record.created
+            'created': record.created,
         }
         try:
             data['message'] = force_text(record.msg)
@@ -97,6 +88,9 @@ class BilorHandler(logging.Handler):
 
         if hasattr(record, 'tags'):
             data['tags'] = record.tags
+
+        if hasattr(record, 'extra'):
+            data['extra'] = record.extra
 
         endpoint = self.host + reverse('api-v1:message')
         headers = {'content-type': 'application/json'}
