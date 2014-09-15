@@ -13,8 +13,8 @@ The idea behind Bilor is using the full power of ElasticSearch to make logging
 more accessible and searchable.
 
 
-Canveats / Future Improvements
-==============================
+Caveats / Future Improvements
+=============================
 
  * The client is currently only a `logging` handler and resides in `bilor.core.handler`.
    This can be easily splitted out into a separate library later.
